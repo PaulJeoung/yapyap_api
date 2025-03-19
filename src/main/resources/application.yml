@@ -5,11 +5,19 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:h2:tcp://localhost/~/testdb
+    url: jdbc:h2:file:~/project/data/testdb # ~ 를 이용한 home 디렉토리 지정 (mac only)
+    # file-base mode(절대 경로) jdbc:h2:file:/Users/paul_jeoung/project/data/testdb
+    # in-memory mode(db실행) jdbc:h2:tcp://localhost/~/testdb
+    # JDBC URL로 DB 접근시 jdbc:h2:file:./data/testdb
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  h2: # 내장으로 변경 하며, 추가
+    console:
+      enabled: true # H2 콘솔활성화
+      path: /h2-console
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect # 내장으로 변경 하며, 추가
     hibernate:
       ddl-auto: update
     properties:

@@ -28,7 +28,4 @@ class BoardServiceTest {
             boardService.addNewBoard(data);
         }
     }
-
-
-
 }

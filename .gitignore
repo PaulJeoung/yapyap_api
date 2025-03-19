@@ -94,3 +94,14 @@ Temporary Items
 ### macOS Patch ###
 # iCloud generated files
 *.icloud
+
+### build files ###
+out/
+out/*
+out/production/
+out/production/*
+out/test/
+out/test/*
+
+### file db ###
+data
