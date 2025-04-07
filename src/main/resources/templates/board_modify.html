@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    </head>
+    <body>
+        <h2 class="text-center text-secondary py-3 mb-3">(유)POF 사내게시판📋 - 수정하기🎤</h2>
+        <div class="container my-3">
+            <form th:object="${boardDTO}" method="post">
+                <div class="form-group">
+                    <label for="title" class="form-label">제목</label>
+                    <input type="text" class="form-control" id="title" name="title" th:field="*{title}"></input>
+                </div>
+                <div class="form-group">
+                    <label for="content" class="form-label">내용</label>
+                    <textarea class="form-control" id="content" name="content" rows="10" th:field="*{content}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="author" class="form-label">작성자</label>
+                    <input class="form-control" id="author" name="author" rows="10" th:field="*{author}" disabled></input>
+                </div>
+                <div class="form-group">
+                    <label for="type" class="form-label">유형</label>
+                    <select class="form-control" id="type" name="type" th:field="*{type}">
+                        <option value="ISSUE">ISSUE</option>
+                        <option value="ARCHITECTURE">ARCHITECTURE</option>
+                        <option value="DESIGN">DESIGN</option>
+                        <option value="DEVELOPED">DEVELOPED</option>
+                        <option value="TASK">TASK</option>
+                        <option value="REPORT">REPORT</option>
+                        <option value="AGENDA">AGENDA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="status" class="form-label">상태값</label>
+                    <select class="form-control" id="status" name="status" th:field="*{status}">
+                        <option value="SUGGEST">SUGGEST</option>
+                        <option value="QNA">Q&A</option>
+                        <option value="OPEN">OPEN</option>
+                        <option value="INPROGRESS">INPROGRESS</option>
+                        <option value="COMPLETE">COMPLETE</option>
+                        <option value="REVIEW">REVIEW</option>
+                        <option value="REOPEN">REOPEN</option>
+                        <option value="CLOSE">CLOSE</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-center mt-2">
+                        <input id="update-btn" th:type="submit" value="수정하기" class="btn btn-outline-warning my-2"
+                               onclick="javascript:void(0)"></input>
+                        <div class="mt-2 ms-3">
+                            <a class="btn btn-outline-secondary" id="get-list" th:href="@{|/board|}" th:text="${'리스트'}"
+                               href="javascript:void(0);" th:data-url="@{|/board|}"></a>
+                        </div>
+                </div>
+            </form>
+
+        </div>
+
+        <script type="text/javascript">
+            const delete_element = document.getElementById("get-list");
+            delete_element.addEventListener('click', function (){
+                if(confirm("작성을 취소하고 리스트로 돌아가시겠습니까?")){
+                    location.href = this.getAttribute("data-url");
+                };
+            });
+        </script>
+        <script type="text/javascript">
+            const update_element = document.getElementById("update-btn");
+            update_element.addEventListener('click', function (){
+                if(confirm("수정 하시겠습니까?")){
+                    location.href = this.getAttribute("type");
+                };
+            });
+        </script>
+    </body>
+</html>

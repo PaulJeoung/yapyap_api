@@ -5,10 +5,10 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:h2:file:~/project/data/testdb # ~ 를 이용한 home 디렉토리 지정 (mac only)
-    # file-base mode(절대 경로) jdbc:h2:file:/Users/paul_jeoung/project/data/testdb
-    # in-memory mode(db실행) jdbc:h2:tcp://localhost/~/testdb
-    # JDBC URL로 DB 접근시 jdbc:h2:file:./data/testdb
+    url: jdbc:h2:file:~/project/data/boarddb;AUTO_SERVER=true # ~ 를 이용한 home 디렉토리 지정 (mac only)
+    # file-base mode(절대 경로) jdbc:h2:file:/Users/paul_jeoung/project/data/boarddb
+    # in-memory mode(db실행) jdbc:h2:tcp://localhost/~/boarddb
+    # JDBC URL로 DB 접근시 jdbc:h2:file:./data/boarddb
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -30,4 +30,4 @@ logging:
     org.hibernate.orm.jdbc.bind: trace
 
 server:
-  port: 8282
+  port: 80 # localhost 로만 접속

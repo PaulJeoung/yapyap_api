@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    </head>
+    <body>
+        <h2 class="text-center text-secondary py-3 mb-3">(유)POF 사내게시판📋 - 상세보기🔎</h2>
+        <div class="container my-3">
+            <table class="table">
+                <thead class="table-dark">
+                   <tr>
+                       <th class="text-center" colspan="2">게시글</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                       <td>제목</td>
+                       <td th:text="${boardDTO.title}"></td>
+                   </tr>
+                   <tr>
+                       <td>내용</td>
+                       <td th:text="${boardDTO.content}"></td>
+                   </tr>
+                   <tr>
+                       <td>작성자</td>
+                       <td th:text="${boardDTO.author}"></td>
+                   </tr>
+                   <tr>
+                       <td>작성일</td>
+                       <td th:text="${#temporals.format(boardDTO.createAt, 'yyyy-MM-dd HH:mm')}"></td>
+                   </tr>
+                   <tr>
+                       <td>유형</td>
+                       <td th:text="${boardDTO.type}"></td>
+                   </tr>
+                   <tr>
+                       <td>상태값</td>
+                       <td th:text="${boardDTO.status}"></td>
+                   </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a class="btn btn-outline-secondary" id="get-list" th:href="@{|/board|}" th:text="${'리스트'}"></a>
+                <a class="btn btn-outline-warning ms-3" id="modify" th:href="@{|/board/modify/${boardDTO.id}|}" th:text="${'수정'}"></a>
+                <a class="btn btn-outline-danger ms-3" id="delete" th:text="${'삭제'}"
+                    href="javascript:void(0);" th:data-url="@{|/board/delete/${boardDTO.id}|}"></a>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            const delete_element = document.getElementById("delete");
+            delete_element.addEventListener('click', function (){
+                if(confirm("작성된 글을 삭제 하시겠습니까?")){
+                    location.href = this.getAttribute("data-url");
+                };
+            });
+        </script>
+
+    </body>
+</html>
+
+
+<!--"contentList": [-->
+<!--{-->
+<!--"id": 2,-->
+<!--"title": "테스트용 게시판입니다 -3월 19일",-->
+<!--"content": "Post 기능 테스트 중입니다",-->
+<!--"author": "paul jeoung",-->
+<!--"type": "Notice",-->
+<!--"status": "inprogress",-->
+<!--"createAt": "2025-59-19"-->
+<!--],-->
+<!--"currentPage": 1,-->
+<!--"totalPages": 1,-->
+<!--"totalElements": 2,-->
+<!--"size": 10-->
+<!--},-->

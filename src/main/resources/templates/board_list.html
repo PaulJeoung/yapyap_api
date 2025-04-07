@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    </head>
+    <body>
+        <h2 class="text-center text-secondary py-3 mb-3">🧑🏽‍💼(유)POF 사내게시판📋</h2>
+        <div class="container my-3">
+            <table class="table">
+                <thead class="table-dark">
+                   <tr class="text-center">
+                       <th>번호</th>
+                       <th>제목</th>
+                       <th>작성자</th>
+                       <th>작성일</th>
+                       <th>유형</th>
+                       <th>상태값</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr th:each="board, loop : ${boardList.contentList}">
+                       <td class="text-center" th:text="${boardList.contentList.size() - loop.index}"></td> <!-- 오름차순 정렬, 내림차순 정렬 : loop.index + 1 -->
+                       <td>
+                           <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>
+                       </td>
+                       <td class="text-center" th:text="${board.author}"></td>
+                       <td class="text-center" th:text="${#temporals.format(board.createAt, 'yyyy-MM-dd HH:mm')}"></td>
+                       <td class="text-center" th:text="${board.type}"></td>
+                       <td class="text-center" th:text="${board.status}"></td>
+                   </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end me-3 mb-2">
+                <a class="btn btn-outline-primary me-3" th:href="@{|/board/create|}" th:text="${'게시글작성'}"></a>
+                <a class="btn btn-outline-secondary me-3" th:href="@{'/board'(page=${boardList.currentPage - 1 }, size=${boardList.size})}" th:text="${'⬅️ 이전'}"
+                   th:if="${boardList.currentPage > 1}"></a>
+                <a class="btn btn-outline-secondary me-3" th:href="@{'/board'(page=${boardList.currentPage + 1 }, size=${boardList.size})}" th:text="${'➡️ 다음'}"
+                   th:if="${boardList.currentPage < boardList.totalPages}"></a>
+            </div>
+            <div class="d-flex justify-content-end me-3 mb-2">
+                <div class="me-3"><span>현재페이지 </span><span class="badge bg-secondary" th:text="${boardList.currentPage}"></span></div>
+                <div class="me-3"><span>전체페이지 </span><span class="badge bg-primary" th:text="${boardList.totalPages}"></span></div>
+                <div class="me-3"><span>전체게시글 </span><span class="badge bg-warning" th:text="${boardList.totalElements}"></span></div>
+                <div class="me-3"><span>페이지사이즈 </span><span class="badge bg-success" th:text="${boardList.size}"></span></div>
+            </div>
+        </div>
+    </body>
+</html>
