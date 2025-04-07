@@ -7,44 +7,60 @@
         <h2 class="text-center text-secondary py-3 mb-3">(유)POF 사내게시판📋 - 글쓰기✏️</h2>
         <div class="container my-3">
             <form th:action="@{/board/create}" th:object="${boardDTO}" method="post">
-                <div class="form-group">
+                <div class="form-group mt-3">
                     <label for="title" class="form-label">제목</label>
                     <input type="text" class="form-control" id="title" name="title"></input>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-3">
                     <label for="content" class="form-label">내용</label>
                     <textarea class="form-control" id="content" name="content" rows="10"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="type" class="form-label">유형</label>
-                    <select class="form-control" id="type" name="type">
-                        <option value="ISSUE">ISSUE</option>
-                        <option value="ARCHITECTURE">ARCHITECTURE</option>
-                        <option value="DESIGN">DESIGN</option>
-                        <option value="DEVELOPED">DEVELOPED</option>
-                        <option value="TASK">TASK</option>
-                        <option value="REPORT">REPORT</option>
-                        <option value="AGENDA">AGENDA</option>
-                    </select>
+                <div class="row">
+                    <div class="col form-group mt-3">
+                        <label for="type" class="form-label">유형</label>
+                        <select class="form-control" id="type" name="type">
+                            <option value="ISSUE">ISSUE</option>
+                            <option value="ARCHITECTURE">ARCHITECTURE</option>
+                            <option value="DESIGN">DESIGN</option>
+                            <option value="DEVELOPED">DEVELOPED</option>
+                            <option value="TASK">TASK</option>
+                            <option value="REPORT">REPORT</option>
+                            <option value="AGENDA">AGENDA</option>
+                        </select>
+                    </div>
+                    <div class="col form-group mt-3">
+                        <label for="status" class="form-label">상태값</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="SUGGEST">SUGGEST</option>
+                            <option value="QNA">Q&A</option>
+                            <option value="OPEN">OPEN</option>
+                            <option value="INPROGRESS">INPROGRESS</option>
+                            <option value="COMPLETE">COMPLETE</option>
+                            <option value="REVIEW">REVIEW</option>
+                            <option value="REOPEN">REOPEN</option>
+                            <option value="CLOSE">CLOSE</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="status" class="form-label">상태값</label>
-                    <select class="form-control" id="status" name="status">
-                        <option value="SUGGEST">SUGGEST</option>
-                        <option value="QNA">Q&A</option>
-                        <option value="OPEN">OPEN</option>
-                        <option value="INPROGRESS">INPROGRESS</option>
-                        <option value="COMPLETE">COMPLETE</option>
-                        <option value="REVIEW">REVIEW</option>
-                        <option value="REOPEN">REOPEN</option>
-                        <option value="CLOSE">CLOSE</option>
-                    </select>
+                <div class="row mt-3">
+                    <div class="col ms-auto">
+                        <input id="save-btn" type="submit" value="저장하기" class="btn btn-outline-primary">
+                    </div>
+                    <div class="col ms-auto">
+                        <a class="btn btn-outline-secondary" id="list-btn" th:href="@{|/board|}" th:text="${'리스트'}"
+                           href="javascript:void(0);" th:data-url="@{|/board|}"></a>
+                    </div>
                 </div>
-                <input type="submit" value="저장하기" class="btn btn-primary my-2">
             </form>
-            <div>
-                <a class="btn btn-secondary" th:href="@{|/board|}" th:text="${'리스트'}">리스트</a>
-            </div>
         </div>
+        <script type="text/javascript">
+            const list_element = document.getElementById("list-btn");
+            list_element.addEventListener('click', function (event){
+                event.preventDefault();
+                if(confirm("리스트로 돌아가시겠습니까?")){
+                    location.href = this.getAttribute("data-url");
+                };
+            });
+        </script>
     </body>
 </html>
